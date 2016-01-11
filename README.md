@@ -12,3 +12,4 @@ Users can also vote for movies.
 ## Frameworks
 - Alamofire
 - SwiftyJSON
+- JLToast
