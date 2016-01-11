@@ -9,11 +9,11 @@
 import Foundation
 
 class Movie {
-    let _id: String
-    let title: String
-    let year: String
-    let description: String
-    let upvotes:Int
+    var _id: String
+    var title: String
+    var year: String
+    var description: String
+    var upvotes:Int
     
     init (_id:String, title:String, year:String, description:String, upvotes:Int){
         self._id = _id
@@ -21,10 +21,5 @@ class Movie {
         self.year = year
         self.description = description
         self.upvotes = upvotes
-    }
-    
-    func show() -> Void
-    {
-        print(self.title)
     }
 }
