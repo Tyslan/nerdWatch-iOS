@@ -71,7 +71,7 @@ class MovieListController : UITableViewController
             movies.append(newMovie)
             tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: movies.count - 1, inSection: 0)], withRowAnimation: .Automatic)
             movie = newMovie
-            let movieJSON = ["title": movie.title, "year": movie.year, "description": movie.description]
+            let movieJSON = ["title": movie.title, "year": movie.year, "description": movie.description, "contributor": movie.contributor]
             Alamofire.request(.POST, baseUrl , parameters: movieJSON, encoding: .JSON)
                 .responseJSON { response in
                     if let json = response.result.value
@@ -85,8 +85,12 @@ class MovieListController : UITableViewController
         }
     }
     
-    @IBAction func refresh()
-    {        
+    @IBAction func RefreshList(){
+        refresh()
+    }
+    
+    func refresh() {
+        movies = []
         Alamofire.request(.GET, baseUrl)
             .responseJSON { response in
                 if let json = response.result.value

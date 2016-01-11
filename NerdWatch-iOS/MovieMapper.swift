@@ -14,11 +14,12 @@ class MovieMapper
     static func jsonToMovie(json:JSON) -> Movie
     {
         let _id = json["_id"].stringValue
-        let title = json["title"].string!
-        let year = json["year"].string!
-        let description = json["description"].string!
+        let title = json["title"].stringValue
+        let year = json["year"].stringValue
+        let description = json["description"].stringValue
         let votes = json["upvotes"].int!
+        let contributor = json["contributor"].stringValue
         
-        return Movie(_id: _id, title: title, year: year, description: description, upvotes: votes)
+        return Movie(_id: _id, title: title, year: year, description: description, upvotes: votes, contributor: contributor)
     }
 }

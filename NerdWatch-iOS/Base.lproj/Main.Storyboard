@@ -49,7 +49,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies" prompt="Movie overview" id="zo9-d2-8uU">
-                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="OW6-8M-CPe"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="OW6-8M-CPe">
+                            <connections>
+                                <action selector="RefreshList" destination="p7I-9b-HGm" id="foi-HQ-JoQ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="taT-cS-JR2">
                             <connections>
                                 <segue destination="2iH-51-iX9" kind="show" identifier="add" id="gmg-n8-HNE"/>
@@ -140,6 +144,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bBF-Ll-QSE">
+                                        <rect key="frame" x="0.0" y="411" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bBF-Ll-QSE" id="zFy-XF-lQG">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ecN-kn-hHJ">
+                                                    <rect key="frame" x="8" y="8" width="584" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ecN-kn-hHJ" secondAttribute="bottom" id="MKi-cW-Hvl"/>
+                                                <constraint firstItem="ecN-kn-hHJ" firstAttribute="leading" secondItem="zFy-XF-lQG" secondAttribute="leadingMargin" id="Yv8-9F-Pqq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ecN-kn-hHJ" secondAttribute="trailing" id="aMT-Cg-7vH"/>
+                                                <constraint firstItem="ecN-kn-hHJ" firstAttribute="top" secondItem="zFy-XF-lQG" secondAttribute="topMargin" id="cY8-5Z-edO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -161,6 +186,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="contibutorField" destination="ecN-kn-hHJ" id="e20-vx-2SX"/>
                         <outlet property="descriptionField" destination="Oop-2K-Ako" id="Ana-l9-xXr"/>
                         <outlet property="titleField" destination="GSD-d3-fHE" id="sdN-lG-bDT"/>
                         <outlet property="yearField" destination="s4p-4H-CSP" id="slZ-4V-nTe"/>
@@ -219,17 +245,29 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWo-Lu-YhT">
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contributor:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzo-yC-Wum">
+                                <rect key="frame" x="20" y="283" width="93" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ContributorLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1Y-QN-27q">
+                                <rect key="frame" x="28" y="312" width="544" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTg-Ix-iWa">
-                                <rect key="frame" x="20" y="283" width="560" height="40"/>
+                                <rect key="frame" x="20" y="341" width="560" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="👍"/>
                                 <connections>
                                     <action selector="voteUp" destination="BYZ-38-t0r" eventType="touchUpInside" id="4B4-YM-MfE"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xWo-Lu-YhT">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -246,10 +284,15 @@
                             <constraint firstItem="2yS-ZL-EXD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZT9-KT-aDb"/>
                             <constraint firstItem="ZL1-5K-ERS" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="8" id="ZgK-Fh-H7W"/>
                             <constraint firstItem="qQY-Uq-jbw" firstAttribute="top" secondItem="ViZ-sp-LUJ" secondAttribute="bottom" constant="8" id="aSk-2b-qgs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="v1Y-QN-27q" secondAttribute="trailing" constant="8" id="c3x-ef-jkC"/>
+                            <constraint firstItem="Mzo-yC-Wum" firstAttribute="top" secondItem="ed4-hI-04R" secondAttribute="bottom" constant="8" id="kDo-lS-Re6"/>
                             <constraint firstItem="HBe-Vh-Unr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="m9O-6a-Pln"/>
+                            <constraint firstItem="Mzo-yC-Wum" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mAZ-x7-cJQ"/>
+                            <constraint firstItem="WTg-Ix-iWa" firstAttribute="top" secondItem="v1Y-QN-27q" secondAttribute="bottom" constant="8" id="mZF-Kj-d5h"/>
                             <constraint firstItem="ZL1-5K-ERS" firstAttribute="top" secondItem="2yS-ZL-EXD" secondAttribute="bottom" constant="8" id="nr1-xc-sOp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ed4-hI-04R" secondAttribute="trailing" constant="8" id="oCQ-Fd-mLe"/>
-                            <constraint firstItem="WTg-Ix-iWa" firstAttribute="top" secondItem="ed4-hI-04R" secondAttribute="bottom" constant="8" id="rMl-LZ-isT"/>
+                            <constraint firstItem="v1Y-QN-27q" firstAttribute="top" secondItem="Mzo-yC-Wum" secondAttribute="bottom" constant="8" id="qTm-hn-Rgo"/>
+                            <constraint firstItem="v1Y-QN-27q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="wQu-qT-rzT"/>
                             <constraint firstItem="ed4-hI-04R" firstAttribute="top" secondItem="HBe-Vh-Unr" secondAttribute="bottom" constant="8" id="wUg-Ip-YZT"/>
                         </constraints>
                     </view>
@@ -261,6 +304,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="contributorLabel" destination="v1Y-QN-27q" id="hcG-AR-JOo"/>
                         <outlet property="descriptionLabel" destination="ZL1-5K-ERS" id="CrK-fW-qgu"/>
                         <outlet property="votesLabel" destination="ed4-hI-04R" id="Tst-eF-cYN"/>
                         <outlet property="yearLabel" destination="qQY-Uq-jbw" id="z3J-L3-qPb"/>

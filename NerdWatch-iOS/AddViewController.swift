@@ -13,6 +13,7 @@ class AddViewController: UITableViewController {
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var yearField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
+    @IBOutlet weak var contibutorField: UITextField!
     
     var movie:Movie?
     
@@ -20,7 +21,8 @@ class AddViewController: UITableViewController {
         if let title = titleField.text where title.characters.count > 1 {
             let year = yearField.text!
             let description = descriptionField.text
-            movie = Movie(_id: "", title: title, year: year, description: description, upvotes: 0)
+            let contributor = contibutorField.text!
+            movie = Movie(_id: "", title: title, year: year, description: description, upvotes: 0, contributor: contributor)
             performSegueWithIdentifier("added", sender: self)
         } else {
             JLToast.makeText("An error has occurred", duration: JLToastDelay.LongDelay).show()

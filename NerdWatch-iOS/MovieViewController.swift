@@ -17,6 +17,7 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var votesLabel: UILabel!
+    @IBOutlet weak var contributorLabel: UILabel!
     
     var movie:Movie!
     var result:Result?
@@ -26,10 +27,11 @@ class MovieViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         
-        self.descriptionLabel.text = movie.description
-        self.yearLabel.text = movie.year
-        self.votesLabel.text = "\(movie.upvotes)"
-        self.title = movie.title
+        descriptionLabel.text = movie.description
+        yearLabel.text = movie.year
+        votesLabel.text = "\(movie.upvotes)"
+        contributorLabel.text = movie.contributor
+        title = movie.title
     }
     
     @IBAction func voteUp() {

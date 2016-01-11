@@ -13,13 +13,15 @@ class Movie {
     var title: String
     var year: String
     var description: String
-    var upvotes:Int
+    var upvotes: Int
+    var contributor: String
     
-    init (_id:String, title:String, year:String, description:String, upvotes:Int){
+    init (_id:String, title:String, year:String, description:String, upvotes:Int, contributor:String){
         self._id = _id
         self.title = title
         self.year = year
         self.description = description
         self.upvotes = upvotes
+        self.contributor = contributor
     }    
 }
