@@ -25,7 +25,7 @@ class AddViewController: UITableViewController {
             movie = Movie(_id: "", title: title, year: year, description: description, upvotes: 0, contributor: contributor)
             performSegueWithIdentifier("added", sender: self)
         } else {
-            JLToast.makeText("An error has occurred", duration: JLToastDelay.LongDelay).show()
+            JLToast.makeText("Some fields are still empty", duration: JLToastDelay.LongDelay).show()
         }
     }
     
