@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import JLToast
 
 class MovieListController : UITableViewController
 {
@@ -58,6 +59,7 @@ class MovieListController : UITableViewController
                 let url = baseUrl + movie._id + "/upvote"
                 Alamofire.request(.PUT, url)
                 tableView.reloadRowsAtIndexPaths([tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
+                JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.ShortDelay).show()
             }
         }
     }
@@ -77,9 +79,8 @@ class MovieListController : UITableViewController
                         let movieJSON = JSON(json)
                         self.movie._id = movieJSON["_id"].stringValue
                     }
-            }
-
-            
+                }
+            JLToast.makeText("\(movie.title) added", duration: JLToastDelay.ShortDelay).show()
             tableView.endUpdates()
         }
     }
@@ -102,6 +103,6 @@ class MovieListController : UITableViewController
                     
                     self.tableView.reloadData()
                 }
-        }
+            }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JLToast
 
 class AddViewController: UITableViewController {
     @IBOutlet weak var titleField: UITextField!
@@ -21,6 +22,8 @@ class AddViewController: UITableViewController {
             let description = descriptionField.text
             movie = Movie(_id: "", title: title, year: year, description: description, upvotes: 0)
             performSegueWithIdentifier("added", sender: self)
+        } else {
+            JLToast.makeText("An error has occurred", duration: JLToastDelay.LongDelay).show()
         }
     }
     
