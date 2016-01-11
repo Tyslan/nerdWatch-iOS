@@ -74,7 +74,6 @@ class MovieListController : UITableViewController
                 .responseJSON { response in
                     if let json = response.result.value
                     {
-                        print(json)
                         let movieJSON = JSON(json)
                         self.movie._id = movieJSON["_id"].stringValue
                     }
