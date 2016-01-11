@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class Movie {
     var _id: String
@@ -21,5 +22,5 @@ class Movie {
         self.year = year
         self.description = description
         self.upvotes = upvotes
-    }
+    }    
 }

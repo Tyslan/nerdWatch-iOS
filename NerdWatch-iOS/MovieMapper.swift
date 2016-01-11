@@ -13,7 +13,7 @@ class MovieMapper
 {
     static func jsonToMovie(json:JSON) -> Movie
     {
-        let _id = json["_id"].string!
+        let _id = json["_id"].stringValue
         let title = json["title"].string!
         let year = json["year"].string!
         let description = json["description"].string!

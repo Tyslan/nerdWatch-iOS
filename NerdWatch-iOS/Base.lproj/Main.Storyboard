@@ -64,7 +64,7 @@
         <!--New movie-->
         <scene sceneID="mMI-f5-qjb">
             <objects>
-                <tableViewController id="2iH-51-iX9" sceneMemberID="viewController">
+                <tableViewController id="2iH-51-iX9" customClass="AddViewController" customModule="NerdWatch_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="3Jj-eF-Jks">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,12 +149,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New movie" prompt="Add a new movie" id="7x5-FU-WjD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gn8-AE-27t">
+                            <connections>
+                                <segue destination="W40-fm-JVE" kind="unwind" identifier="added" unwindAction="unwindFromAdd:" id="Ss6-in-zKq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="V30-ki-sKj">
                             <connections>
-                                <segue destination="W40-fm-JVE" kind="unwind" unwindAction="unwindFromAdd:" id="f2o-cW-a7b"/>
+                                <action selector="save" destination="2iH-51-iX9" id="Dge-EG-zeq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionField" destination="Oop-2K-Ako" id="Ana-l9-xXr"/>
+                        <outlet property="titleField" destination="GSD-d3-fHE" id="sdN-lG-bDT"/>
+                        <outlet property="yearField" destination="s4p-4H-CSP" id="slZ-4V-nTe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9oF-Zt-PPP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="W40-fm-JVE" userLabel="Exit" sceneMemberID="exit"/>

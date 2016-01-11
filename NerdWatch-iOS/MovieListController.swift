@@ -13,6 +13,7 @@ import SwiftyJSON
 class MovieListController : UITableViewController
 {
     var movies:[Movie] = []
+    var movie: Movie!
     let baseUrl = "https://lorenzverschingel.herokuapp.com/api/movies/"
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -63,10 +64,23 @@ class MovieListController : UITableViewController
     
     @IBAction func unwindFromAdd(segue: UIStoryboardSegue) {
         let movieViewController = segue.sourceViewController as! AddViewController
-        if let movie = movieViewController.movie {
+        if let newMovie = movieViewController.movie {
             tableView.beginUpdates()
-            movies.append(movie)
+            movies.append(newMovie)
             tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: movies.count - 1, inSection: 0)], withRowAnimation: .Automatic)
+            movie = newMovie
+            let movieJSON = ["title": movie.title, "year": movie.year, "description": movie.description]
+            Alamofire.request(.POST, baseUrl , parameters: movieJSON, encoding: .JSON)
+                .responseJSON { response in
+                    if let json = response.result.value
+                    {
+                        print(json)
+                        let movieJSON = JSON(json)
+                        self.movie._id = movieJSON["_id"].stringValue
+                    }
+            }
+
+            
             tableView.endUpdates()
         }
     }
