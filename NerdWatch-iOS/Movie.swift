@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 
 class Movie {
     var _id: String
