@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class MovieViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
                     self.descriptionLabel.text = movieJSON["description"].string
                     self.yearLabel.text = movieJSON["year"].string
                     self.votes = movieJSON["upvotes"].int!
-                    self.votesLabel.text = String(self.votes)
+                    self.votesLabel.text = "\(self.votes)"
                     print(movieJSON)
                 }
         }
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         votes += 1
         let url = baseUrl + id + "/upvote"
         Alamofire.request(.PUT, url)
-        votesLabel.text = String(self.votes)
+        self.votesLabel.text = "\(self.votes)"
     }
 
     override func didReceiveMemoryWarning() {
