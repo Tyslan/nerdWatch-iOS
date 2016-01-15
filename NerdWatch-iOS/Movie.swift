@@ -17,18 +17,14 @@ class Movie: Object {
     dynamic var upvotes: Int = 0
     dynamic var contributor: String = ""
     
-    init (_id:String, title:String, year:String, description:String, upvotes:Int, contributor:String){
-        super.init()
+    convenience init (_id:String, title:String, year:String, description:String, upvotes:Int, contributor:String){
+        self.init()
         self._id = _id
         self.title = title
         self.year = year
         self.movieDescription = description
         self.upvotes = upvotes
         self.contributor = contributor
-    }
-
-    required init() {
-        super.init()
     }
     
     override static func primaryKey() -> String? {

@@ -10,12 +10,15 @@ import RealmSwift
 
 class DbHandler
 {
+    static let realm = try! Realm()
     
+    static func getAllMovies() -> Void
+    {
+        let movies = self.realm.objects(Movie)
+    }
     
     static func writeMovieArrayToDB(movies: [Movie])
     {
-        let realm = try! Realm()
-        
         for movie in movies{
             try! realm.write {
                 realm.add(movie)
@@ -25,10 +28,24 @@ class DbHandler
     
     static func updateMovie(movie: Movie)
     {
-        let realm = try! Realm()
-        
+        let votes = movie.upvotes + 1
         try! realm.write {
-            realm.add(movie, update: true)
+            realm.create(Movie.self, value: ["id": movie._id, "upvotes": votes], update: true)
+            try! realm.commitWrite()
+        }
+    }
+    
+    static func addMovie(movie: Movie)
+    {
+        try! realm.write {
+            realm.add(movie)
+        }
+    }
+    
+    static func clearMovieDB()
+    {
+        try! realm.write {
+            realm.deleteAll()
         }
     }
     
