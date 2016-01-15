@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import JLToast
+import RealmSwift
 
 class MovieListController : UITableViewController
 {
@@ -22,6 +23,7 @@ class MovieListController : UITableViewController
     }
     
     override func viewDidLoad() {
+        // print(Realm.Configuration.defaultConfiguration.path!)
         refresh()
     }
     

@@ -27,7 +27,7 @@ class MovieViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         
-        descriptionLabel.text = movie.description
+        descriptionLabel.text = movie.movieDescription
         yearLabel.text = movie.year
         votesLabel.text = "\(movie.upvotes)"
         contributorLabel.text = movie.contributor

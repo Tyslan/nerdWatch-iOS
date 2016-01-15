@@ -7,21 +7,27 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Movie {
-    var _id: String
-    var title: String
-    var year: String
-    var description: String
-    var upvotes: Int
-    var contributor: String
+class Movie: Object {
+    dynamic var _id: String = ""
+    dynamic var title: String = ""
+    dynamic var year: String = ""
+    dynamic var movieDescription: String = ""
+    dynamic var upvotes: Int = 0
+    dynamic var contributor: String = ""
     
     init (_id:String, title:String, year:String, description:String, upvotes:Int, contributor:String){
+        super.init()
         self._id = _id
         self.title = title
         self.year = year
-        self.description = description
+        self.movieDescription = description
         self.upvotes = upvotes
         self.contributor = contributor
-    }    
+    }
+
+    required init() {
+        super.init()
+    }
 }
