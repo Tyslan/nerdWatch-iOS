@@ -42,9 +42,10 @@ class DbHandler
         }
     }
     
-    static func updateMovie(movie: Movie)
+    static func upvoteMovie(movie: Movie)
     {
         try! realm.write {
+            movie.upvotes += 1
             realm.add(movie, update: true)
         }
     }

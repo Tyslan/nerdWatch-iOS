@@ -24,8 +24,11 @@ class MovieListController : UITableViewController
     
     override func viewDidLoad() {
         print(Realm.Configuration.defaultConfiguration.path!)
+        
         movies = DbHandler.getAllMovies()
-//        refresh()
+        if movies.count == 0 {
+            refresh()
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,12 +61,11 @@ class MovieListController : UITableViewController
             switch result {
             case .Voted:
                 let movie = movies[selectedIndex]
-                movie.upvotes += 1
                 
                 let url = baseUrl + movie._id + "/upvote"
                 Alamofire.request(.PUT, url)
                 
-                DbHandler.updateMovie(movie)
+                DbHandler.upvoteMovie(movie)
                 
                 tableView.reloadRowsAtIndexPaths([tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
                 JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.LongDelay).show()
