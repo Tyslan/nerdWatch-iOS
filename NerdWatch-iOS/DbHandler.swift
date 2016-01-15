@@ -23,4 +23,13 @@ class DbHandler
         }
     }
     
+    static func updateMovie(movie: Movie)
+    {
+        let realm = try! Realm()
+        
+        try! realm.write {
+            realm.add(movie, update: true)
+        }
+    }
+    
 }

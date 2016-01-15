@@ -58,8 +58,12 @@ class MovieListController : UITableViewController
             case .Voted:
                 let movie = movies[selectedIndex]
                 movie.upvotes += 1
+                
                 let url = baseUrl + movie._id + "/upvote"
                 Alamofire.request(.PUT, url)
+                
+                DbHandler.updateMovie(movie)
+                
                 tableView.reloadRowsAtIndexPaths([tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
                 JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.LongDelay).show()
             }

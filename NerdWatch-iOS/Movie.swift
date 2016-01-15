@@ -30,4 +30,8 @@ class Movie: Object {
     required init() {
         super.init()
     }
+    
+    override static func primaryKey() -> String? {
+        return "_id"
+    }
 }
