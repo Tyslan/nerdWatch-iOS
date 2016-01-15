@@ -27,9 +27,6 @@ class MovieListController : UITableViewController
 //        print(Realm.Configuration.defaultConfiguration.path!)
         
         movies = DbHandler.getAllMovies()
-        if movies.count == 0 {
-            refresh()
-        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,11 +62,17 @@ class MovieListController : UITableViewController
                 
                 let url = baseUrl + movie._id + "/upvote"
                 Alamofire.request(.PUT, url)
-                
-                DbHandler.upvoteMovie(movie)
-                
-                tableView.reloadRowsAtIndexPaths([tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
-                JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.LongDelay).show()
+                    .responseJSON { response in
+                        if response.result.isSuccess {
+                            DbHandler.upvoteMovie(movie)
+                            self.sortMovies()
+                            self.tableView.reloadData();
+//                            self.tableView.reloadRowsAtIndexPaths([self.tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
+                            JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.LongDelay).show()
+                        } else {
+                            JLToast.makeText("Error: Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
+                        }
+                    }
             }
         }
     }
@@ -125,9 +128,7 @@ class MovieListController : UITableViewController
                             self.movies.append(MovieMapper.jsonToMovie(obj))
                         }
                         
-                        self.movies.sortInPlace {
-                            return $0.upvotes > $1.upvotes
-                        }
+                        self.sortMovies()
                         
                         self.tableView.reloadData()
                         
@@ -136,8 +137,14 @@ class MovieListController : UITableViewController
                         JLToast.makeText("Refreshed", duration: JLToastDelay.LongDelay).show()
                     }
                 } else {
-                    JLToast.makeText("Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
+                    JLToast.makeText("Error: Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
                 }
             }
+    }
+    
+    private func sortMovies(){
+        self.movies.sortInPlace {
+            return $0.upvotes > $1.upvotes
+        }
     }
 }
