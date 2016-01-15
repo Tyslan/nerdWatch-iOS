@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieViewController: UIViewController {
+class MovieViewController: UITableViewController {
     enum Result
     {
         case Voted
@@ -31,7 +31,7 @@ class MovieViewController: UIViewController {
         yearLabel.text = movie.year
         votesLabel.text = "\(movie.upvotes)"
         contributorLabel.text = movie.contributor
-        title = movie.title
+        title = movie.title        
     }
     
     @IBAction func voteUp() {
