@@ -23,7 +23,8 @@ class MovieListController : UITableViewController
     }
     
     override func viewDidLoad() {
-        print(Realm.Configuration.defaultConfiguration.path!)
+//        find path to db (needed form Realm browser)
+//        print(Realm.Configuration.defaultConfiguration.path!)
         
         movies = DbHandler.getAllMovies()
         if movies.count == 0 {
