@@ -24,8 +24,8 @@ class MovieListController : UITableViewController
     
     override func viewDidLoad() {
         print(Realm.Configuration.defaultConfiguration.path!)
-        DbHandler.getAllMovies()
-        refresh()
+        movies = DbHandler.getAllMovies()
+//        refresh()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,13 +58,12 @@ class MovieListController : UITableViewController
             switch result {
             case .Voted:
                 let movie = movies[selectedIndex]
+                movie.upvotes += 1
                 
                 let url = baseUrl + movie._id + "/upvote"
                 Alamofire.request(.PUT, url)
                 
                 DbHandler.updateMovie(movie)
-                
-                movie.upvotes += 1
                 
                 tableView.reloadRowsAtIndexPaths([tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
                 JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.LongDelay).show()
@@ -90,9 +89,11 @@ class MovieListController : UITableViewController
                     {
                         let movieJSON = JSON(json)
                         self.movie._id = movieJSON["_id"].stringValue
+                        
                         DbHandler.addMovie(self.movie)
                     }
                 }
+            
             JLToast.makeText("\(movie.title) added", duration: JLToastDelay.LongDelay).show()
             tableView.endUpdates()
         }
@@ -126,6 +127,8 @@ class MovieListController : UITableViewController
                     self.tableView.reloadData()
                     
                     DbHandler.writeMovieArrayToDB(self.movies)
+                    
+                    JLToast.makeText("Refreshed", duration: JLToastDelay.LongDelay).show()
                 }
             }
     }

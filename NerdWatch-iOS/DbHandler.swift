@@ -12,9 +12,18 @@ class DbHandler
 {
     static let realm = try! Realm()
     
-    static func getAllMovies() -> Void
+    static func getAllMovies() -> [Movie]
     {
-        let movies = self.realm.objects(Movie)
+        let moviesResult = self.realm.objects(Movie)
+        
+        var movies:[Movie] = []
+        
+        for movie in moviesResult
+        {
+            movies.append(movie)
+        }
+        
+        return movies
     }
     
     static func writeMovieArrayToDB(movies: [Movie])
@@ -26,19 +35,17 @@ class DbHandler
         }
     }
     
-    static func updateMovie(movie: Movie)
-    {
-        let votes = movie.upvotes + 1
-        try! realm.write {
-            realm.create(Movie.self, value: ["id": movie._id, "upvotes": votes], update: true)
-            try! realm.commitWrite()
-        }
-    }
-    
     static func addMovie(movie: Movie)
     {
         try! realm.write {
             realm.add(movie)
+        }
+    }
+    
+    static func updateMovie(movie: Movie)
+    {
+        try! realm.write {
+            realm.add(movie, update: true)
         }
     }
     
