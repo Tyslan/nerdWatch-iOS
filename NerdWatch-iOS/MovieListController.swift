@@ -23,7 +23,7 @@ class MovieListController : UITableViewController
     }
     
     override func viewDidLoad() {
-        // print(Realm.Configuration.defaultConfiguration.path!)
+        print(Realm.Configuration.defaultConfiguration.path!)
         refresh()
     }
     
@@ -108,6 +108,8 @@ class MovieListController : UITableViewController
                     }
                     
                     self.tableView.reloadData()
+                    
+                    DbHandler.writeMovieArrayToDB(self.movies)
                 }
             }
     }

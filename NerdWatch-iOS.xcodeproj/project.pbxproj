@@ -10,13 +10,14 @@
 		0651FD5969A730ADA37ED1D8 /* Pods_NerdWatch_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D3623AFA8F475072858828 /* Pods_NerdWatch_iOS.framework */; };
 		6ECC33371C4393E000B51129 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC33361C4393E000B51129 /* AppDelegate.swift */; };
 		6ECC33391C4393E000B51129 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC33381C4393E000B51129 /* MovieViewController.swift */; };
-		6ECC333C1C4393E100B51129 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECC333A1C4393E100B51129 /* Main.storyboard */; };
+		6ECC333C1C4393E100B51129 /* Main.Storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECC333A1C4393E100B51129 /* Main.Storyboard */; };
 		6ECC333E1C4393E100B51129 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ECC333D1C4393E100B51129 /* Assets.xcassets */; };
 		6ECC33411C4393E100B51129 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECC333F1C4393E100B51129 /* LaunchScreen.storyboard */; };
 		6ECC334D1C43AB8900B51129 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC334C1C43AB8900B51129 /* MovieListController.swift */; };
 		6ECC334F1C43AD7400B51129 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC334E1C43AD7400B51129 /* Movie.swift */; };
 		6ECC33521C43B12300B51129 /* MovieMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC33511C43B12300B51129 /* MovieMapper.swift */; };
 		6ECC33541C43D7EC00B51129 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECC33531C43D7EC00B51129 /* AddViewController.swift */; };
+		6EF1994D1C492661006168D1 /* DbHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1994C1C492661006168D1 /* DbHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		6ECC334E1C43AD7400B51129 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		6ECC33511C43B12300B51129 /* MovieMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieMapper.swift; sourceTree = "<group>"; };
 		6ECC33531C43D7EC00B51129 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		6EF1994C1C492661006168D1 /* DbHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DbHandler.swift; sourceTree = "<group>"; };
 		81D3623AFA8F475072858828 /* Pods_NerdWatch_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NerdWatch_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				6ECC33511C43B12300B51129 /* MovieMapper.swift */,
+				6EF1994C1C492661006168D1 /* DbHandler.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			files = (
 				6ECC33391C4393E000B51129 /* MovieViewController.swift in Sources */,
 				6ECC334D1C43AB8900B51129 /* MovieListController.swift in Sources */,
+				6EF1994D1C492661006168D1 /* DbHandler.swift in Sources */,
 				6ECC33541C43D7EC00B51129 /* AddViewController.swift in Sources */,
 				6ECC334F1C43AD7400B51129 /* Movie.swift in Sources */,
 				6ECC33521C43B12300B51129 /* MovieMapper.swift in Sources */,
