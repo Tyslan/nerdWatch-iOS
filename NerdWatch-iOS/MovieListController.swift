@@ -80,29 +80,37 @@ class MovieListController : UITableViewController
     @IBAction func unwindFromAdd(segue: UIStoryboardSegue) {
         let movieViewController = segue.sourceViewController as! AddViewController
         if let newMovie = movieViewController.movie {
-            tableView.beginUpdates()
-            
-            movies.append(newMovie)
-            
-            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: movies.count - 1, inSection: 0)], withRowAnimation: .Automatic)
+//            tableView.beginUpdates()
+//            
+//            movies.append(newMovie)
+//            
+//            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: movies.count - 1, inSection: 0)], withRowAnimation: .Automatic)
             
             movie = newMovie
             let movieJSON = ["title": movie.title, "year": movie.year, "description": movie.description, "contributor": movie.contributor]
             
             Alamofire.request(.POST, baseUrl , parameters: movieJSON, encoding: .JSON)
                 .responseJSON { response in
-                    if let json = response.result.value
-                    {
-                        let movieJSON = JSON(json)
-                        self.movie._id = movieJSON["_id"].stringValue
-                        
-                        DbHandler.addMovie(self.movie)
-                        
-                        JLToast.makeText("\(self.movie.title) added", duration: JLToastDelay.LongDelay).show()
+                    if response.result.isSuccess {
+                        if let json = response.result.value
+                        {
+                            let movieJSON = JSON(json)
+                            self.movie._id = movieJSON["_id"].stringValue
+                            
+                            DbHandler.addMovie(self.movie)
+                            
+                            self.movies.append(self.movie)
+                            
+                            self.tableView.reloadData()
+                            
+                            JLToast.makeText("\(self.movie.title) added", duration: JLToastDelay.LongDelay).show()
+                        }
+                    } else {
+                        JLToast.makeText("Error: Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
                     }
                 }
 
-            tableView.endUpdates()
+//            tableView.endUpdates()
         }
     }
     
@@ -128,6 +136,7 @@ class MovieListController : UITableViewController
                             self.movies.append(MovieMapper.jsonToMovie(obj))
                         }
                         
+                        // if sorted here already in right order in database
                         self.sortMovies()
                         
                         self.tableView.reloadData()

@@ -14,7 +14,7 @@ class DbHandler
     
     static func getAllMovies() -> [Movie]
     {
-        let moviesResult = self.realm.objects(Movie)
+        let moviesResult = self.realm.objects(Movie).sorted("upvotes", ascending: false)
         
         var movies:[Movie] = []
         
