@@ -26,7 +26,7 @@ class MovieListController : UITableViewController
 //        find path to db (needed form Realm browser)
 //        print(Realm.Configuration.defaultConfiguration.path!)
         
-        movies = DbHandler.getAllMovies()
+        refresh()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +70,7 @@ class MovieListController : UITableViewController
 //                            self.tableView.reloadRowsAtIndexPaths([self.tableView.indexPathForSelectedRow!], withRowAnimation: .Automatic)
                             JLToast.makeText("Voted for: \(movie.title)", duration: JLToastDelay.LongDelay).show()
                         } else {
-                            JLToast.makeText("Error: Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
+                            JLToast.makeText("Error: Could not connect to server", duration: JLToastDelay.LongDelay).show()
                         }
                     }
             }
@@ -106,7 +106,7 @@ class MovieListController : UITableViewController
                             JLToast.makeText("\(self.movie.title) added", duration: JLToastDelay.LongDelay).show()
                         }
                     } else {
-                        JLToast.makeText("Error: Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
+                        JLToast.makeText("Error: Could not connect to server", duration: JLToastDelay.LongDelay).show()
                     }
                 }
 
@@ -122,14 +122,14 @@ class MovieListController : UITableViewController
         // leeg movie array (dubbels voorkomen)
         movies = []
         
-        //l leeg db (dubbels voorkomen)
-        DbHandler.clearMovieDB();
-        
         Alamofire.request(.GET, baseUrl)
             .responseJSON { response in
                 if response.result.isSuccess {
                     if let json = response.result.value
                     {
+                        //l leeg db (dubbels voorkomen)
+                        DbHandler.clearMovieDB();
+                        
                         let movieJSON = JSON(json).arrayValue
                         
                         for obj in movieJSON {
@@ -143,10 +143,13 @@ class MovieListController : UITableViewController
                         
                         DbHandler.writeMovieArrayToDB(self.movies)
                         
-                        JLToast.makeText("Refreshed", duration: JLToastDelay.LongDelay).show()
+                        JLToast.makeText("Movies loaded", duration: JLToastDelay.LongDelay).show()
                     }
                 } else {
-                    JLToast.makeText("Error: Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
+                    JLToast.makeText("Error: Could not connect to server", duration: JLToastDelay.ShortDelay).show()
+                    self.movies = DbHandler.getAllMovies()
+                    self.tableView.reloadData()
+                    JLToast.makeText("Last know state loaded", duration: JLToastDelay.LongDelay).show()
                 }
             }
     }
