@@ -116,23 +116,27 @@ class MovieListController : UITableViewController
         
         Alamofire.request(.GET, baseUrl)
             .responseJSON { response in
-                if let json = response.result.value
-                {
-                    let movieJSON = JSON(json).arrayValue
-                    
-                    for obj in movieJSON {
-                        self.movies.append(MovieMapper.jsonToMovie(obj))
+                if response.result.isSuccess {
+                    if let json = response.result.value
+                    {
+                        let movieJSON = JSON(json).arrayValue
+                        
+                        for obj in movieJSON {
+                            self.movies.append(MovieMapper.jsonToMovie(obj))
+                        }
+                        
+                        self.movies.sortInPlace {
+                            return $0.upvotes > $1.upvotes
+                        }
+                        
+                        self.tableView.reloadData()
+                        
+                        DbHandler.writeMovieArrayToDB(self.movies)
+                        
+                        JLToast.makeText("Refreshed", duration: JLToastDelay.LongDelay).show()
                     }
-                    
-                    self.movies.sortInPlace {
-                        return $0.upvotes > $1.upvotes
-                    }
-                    
-                    self.tableView.reloadData()
-                    
-                    DbHandler.writeMovieArrayToDB(self.movies)
-                    
-                    JLToast.makeText("Refreshed", duration: JLToastDelay.LongDelay).show()
+                } else {
+                    JLToast.makeText("Couldn't connect to server", duration: JLToastDelay.LongDelay).show()
                 }
             }
     }
