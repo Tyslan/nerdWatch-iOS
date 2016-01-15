@@ -93,15 +93,16 @@ class MovieListController : UITableViewController
                         self.movie._id = movieJSON["_id"].stringValue
                         
                         DbHandler.addMovie(self.movie)
+                        
+                        JLToast.makeText("\(self.movie.title) added", duration: JLToastDelay.LongDelay).show()
                     }
                 }
-            
-            JLToast.makeText("\(movie.title) added", duration: JLToastDelay.LongDelay).show()
+
             tableView.endUpdates()
         }
     }
     
-    @IBAction func RefreshList(){
+    @IBAction func RefreshList() {
         refresh()
     }
     

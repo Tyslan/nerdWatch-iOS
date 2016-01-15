@@ -10,8 +10,10 @@ Users have also the possibility to add their own movies to the project.
 - See nerd approved movies
 - Vote for nerd approved movies
 - Add new nerdy movies
+- All changes are saved in a online REST API and in a local database
 
 ## Frameworks
 - Alamofire
 - SwiftyJSON
 - JLToast
+- RealmSwift
